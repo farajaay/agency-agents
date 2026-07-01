@@ -50,6 +50,7 @@ Prefer the command line? The script-based options below install the same agents.
 ./scripts/install.sh --tool claude-code
 
 # Or manually copy a category if you only want one division
+# (use "$CLAUDE_CONFIG_DIR/agents" instead if you've relocated your config)
 cp engineering/*.md ~/.claude/agents/
 
 # Then activate any agent in your Claude Code sessions:
@@ -662,7 +663,7 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 
 ### Supported Tools
 
-- **[Claude Code](https://claude.ai/code)** — native `.md` agents, no conversion needed → `~/.claude/agents/`
+- **[Claude Code](https://claude.ai/code)** — native `.md` agents, no conversion needed → `~/.claude/agents/` (or `$CLAUDE_CONFIG_DIR/agents`)
 - **[GitHub Copilot](https://github.com/copilot)** — native `.md` agents, no conversion needed → `~/.github/agents/` + `~/.copilot/agents/`
 - **[Antigravity](https://github.com/google-gemini/antigravity)** — `SKILL.md` per agent → `~/.gemini/antigravity/skills/`
 - **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** -- `.md` agent files -> `~/.gemini/agents/`
@@ -754,7 +755,7 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
 <details>
 <summary><strong>Claude Code</strong></summary>
 
-Agents are copied directly from the repo into `~/.claude/agents/` -- no conversion needed.
+Agents are copied directly from the repo into `~/.claude/agents/` (or `$CLAUDE_CONFIG_DIR/agents` if you've relocated your config) -- no conversion needed.
 
 ```bash
 ./scripts/install.sh --tool claude-code
@@ -1054,7 +1055,7 @@ To everyone who has opened a PR, filed an issue, started a Discussion, or simply
 ## 🚀 Get Started
 
 1. **Browse** the agents above and find specialists for your needs
-2. **Copy** the agents to `~/.claude/agents/` for Claude Code integration
+2. **Copy** the agents to `~/.claude/agents/` (or `$CLAUDE_CONFIG_DIR/agents` if you've relocated your config) for Claude Code integration
 3. **Activate** agents by referencing them in your Claude conversations
 4. **Customize** agent personalities and workflows for your specific needs
 5. **Share** your results and contribute back to the community
