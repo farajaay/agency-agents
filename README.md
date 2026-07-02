@@ -381,6 +381,7 @@ The unique specialists who don't fit in a box.
 | 🤝 [M&A Integration Manager](specialized/ma-integration-manager.md) | Post-merger integration | Day 1/100-day plans, synergy tracking, TSA management |
 | 🧠 [Organizational Psychologist](specialized/organizational-psychologist.md) | Team dynamics & culture health | Psychological safety, burnout risk, high-performing teams |
 | ⚔️ [Strategy Duel Agent](specialized/specialized-strategy-duel-agent.md) | Game theory & the 36 stratagems | Turn-based strategy duels, adversarial scenario simulation |
+| 🔍 [Bright Data Rapid Agent](specialized/brightdata-rapid-agent.agent.md) | Bright Data MCP search, discovery, scraping | Live web research with cited sources |
 
 ### 💵 Finance Division
 
