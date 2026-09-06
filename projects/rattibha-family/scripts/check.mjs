@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+execFileSync(process.execPath,['--check',path.join(root,'dist/app.js')]);
+const html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
+for(const [,asset] of html.matchAll(/(?:src|href)="([^"#]+)"/g)){if(asset==='./'||/^https?:/.test(asset))continue;assert.ok(fs.existsSync(path.join(root,'dist',asset)),asset);}
+const source=fs.readFileSync(path.join(root,'dist/app.js'),'utf8');
+const context=vm.createContext({Date});
+vm.runInContext(source.split('let state=fresh()')[0]+';this.api={fresh,validate,sunday};',context);
+const {fresh,validate,sunday}=context.api;
+assert.ok(validate(fresh()));
+assert.equal(sunday(new Date('2026-09-09T12:00:00')),'2026-09-06');
+assert.equal(sunday(new Date('2026-09-06T12:00:00')),'2026-09-06');
+const valid=fresh();valid.tasks.push({id:'t1',day:0,text:'حقيبة المدرسة',owner:'أحد الوالدين',time:'07:00',done:false});
+assert.ok(validate(valid));assert.ok(validate(JSON.parse(JSON.stringify(valid))));
+const badDay=structuredClone(valid);badDay.tasks[0].day=9;assert.equal(validate(badDay),false);
+const badTime=structuredClone(valid);badTime.tasks[0].time='99:99';assert.equal(validate(badTime),false);
+const badMeals=structuredClone(valid);badMeals.meals=[];assert.equal(validate(badMeals),false);
+const badRoutine=structuredClone(valid);badRoutine.routines[0].done=[88];assert.equal(validate(badRoutine),false);
+assert.equal(Boolean(validate(null)),false);
+console.log('PASS: syntax, local assets, fresh state, Sunday normalization, backup round-trip, invalid day/time/meals/routine rejection.');
