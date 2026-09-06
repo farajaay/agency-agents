@@ -1,0 +1,1 @@
+Read AGENTS.md and STATUS.md. Use project agents only for a concrete bounded task that benefits from delegation. Do not launch all agents together. Run node scripts/check.mjs before release. No customer-facing AI API calls. Stop at missing external credentials and record the specific blocker.
